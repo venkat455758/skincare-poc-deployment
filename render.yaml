@@ -1,0 +1,26 @@
+
+services:
+  - type: web
+    name: skincare-frontend
+    runtime: static
+    rootDir: skincare-poc-main/frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  - type: web
+    name: skincare-backend
+    runtime: node
+    rootDir: skincare-poc-main/backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        sync: false
