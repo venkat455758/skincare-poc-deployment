@@ -1,9 +1,19 @@
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+
+  server: {
+    host: '0.0.0.0',
+    allowedHosts: true,
+  },
+
   preview: {
-    allowedHosts: ['creative-liberation-production-92f2b9ee.up.railway.app'],
+    host: '0.0.0.0',
+    port: process.env.PORT || 8080,
+    strictPort: true,
+    allowedHosts: true,
   },
 })
